@@ -6,7 +6,6 @@ bot_working = True
 
 
 def input_error(func):
-    MAX_CONSECUTIVE_ERRORS = 5
     def inner(*args, **kwargs):
         consecutive_errors = 0
         while bot_working:
@@ -23,7 +22,7 @@ def input_error(func):
             except Exception as e:
                 print('Error:', e)
             consecutive_errors += 1
-            if consecutive_errors >= MAX_CONSECUTIVE_ERRORS:
+            if consecutive_errors >= 5:
                 print("Exiting due to consecutive wrong commands.")
                 close()
                 break
@@ -149,7 +148,7 @@ COMMANDS = {'hello': hello,
 
 @input_error
 def main():
-    print("How may I help you today?")
+    print("How may I help you?")
     while bot_working:
         s = input()
         command, arguments = command_parse(s)
