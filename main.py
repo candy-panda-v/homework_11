@@ -30,11 +30,6 @@ def input_error(func):
     return inner
 
 
-def start():
-    print("How may I help you today?")
-    address_book.load_from_file("address_book.bin")
-
-
 def show_page(page_number=1, count=5):
     return address_book.show_page(page_number, count)
 
@@ -49,7 +44,6 @@ def helper():
 def close():
     global bot_working
     bot_working = False
-    address_book.save_to_file('address_book.bin')
     return ("Good bye!\nBot stopped.")
 
 
@@ -155,7 +149,7 @@ COMMANDS = {'hello': hello,
 
 @input_error
 def main():
-    start()
+    print("How may I help you today?")
     while bot_working:
         s = input()
         command, arguments = command_parse(s)

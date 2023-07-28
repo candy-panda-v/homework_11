@@ -1,7 +1,6 @@
 import datetime as DT
 from collections import UserDict
 import os
-import pickle
 
 
 class AddressBook(UserDict):
@@ -23,23 +22,6 @@ class AddressBook(UserDict):
             elif i >= end:
                 break
 
-    def save_to_file(self, filename):
-        with open(filename, mode="wb") as file:
-            pickle.dump(self.data, file)
-            print("Address book save.")
-
-    def load_from_file(self, filename):
-        try:
-            with open(filename, 'rb') as f:
-                if os.stat(filename).st_size == 0:
-                    self.data = {}
-                else:
-                    self.data = pickle.load(f)
-                print("Address book loaded.")
-        except (FileNotFoundError, pickle.UnpicklingError):
-            with open(filename, 'wb') as f:
-                self.data = {}
-                pickle.dump(self.data, f)
 
     def show_page(self, page_number=1, count=5):
         num_pages = len(self) // count + (1 if len(self) % count > 0 else 0)
